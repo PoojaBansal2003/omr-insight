@@ -10,7 +10,7 @@ import {
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { path: "/", label: "Upload", icon: Upload },
+  { path: "/upload", label: "Upload", icon: Upload },
   { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { path: "/analytics", label: "Analytics", icon: BarChart3 },
   { path: "/review", label: "Review", icon: AlertTriangle },
@@ -23,7 +23,7 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
+          <NavLink to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
             <div className="p-2 bg-gradient-to-br from-primary to-primary-glow rounded-xl text-primary-foreground">
               <Brain className="h-6 w-6" />
             </div>
@@ -31,7 +31,7 @@ export function Navigation() {
               <h1 className="text-xl font-bold text-foreground">OMR Evaluator</h1>
               <p className="text-xs text-muted-foreground">Empowering Evaluators with Instant Insights</p>
             </div>
-          </div>
+          </NavLink>
 
           {/* Navigation Links */}
           <div className="flex space-x-1">
