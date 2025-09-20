@@ -10,7 +10,8 @@ import {
   CheckCircle,
   Clock,
   Shield,
-  Zap
+  Zap,
+  PieChart
 } from "lucide-react";
 
 export default function Home() {
@@ -57,38 +58,39 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary-glow/5" />
+      <section className="relative py-24 lg:py-40 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary-glow/10 rounded-3xl" />
         <div className="relative max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center space-x-3 bg-card/50 backdrop-blur-sm border border-border/50 rounded-full px-6 py-3 mb-8">
-              <Brain className="h-5 w-5 text-primary" />
-              <span className="text-sm font-medium text-muted-foreground">
-                Next-Generation OMR Evaluation System
+          <div className="text-center max-w-5xl mx-auto">
+            <div className="inline-flex items-center space-x-3 bg-primary/10 text-primary rounded-full px-6 py-3 mb-8 border border-primary/20">
+              <Brain className="h-5 w-5" />
+              <span className="text-sm font-medium">
+                ✨ Next-Generation OMR Processing
               </span>
             </div>
             
-            <h1 className="text-4xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
+            <h1 className="text-5xl lg:text-8xl font-bold text-foreground mb-8 leading-tight">
               Empowering Evaluators with
-              <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
-                {" "}Instant Insights
+              <span className="bg-gradient-to-r from-primary via-primary-glow to-primary bg-clip-text text-transparent block">
+                Instant Insights
               </span>
             </h1>
             
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-              Transform your evaluation process with AI-powered OMR sheet processing. 
-              Get accurate results in seconds, not hours.
+            <p className="text-xl lg:text-2xl text-muted-foreground mb-12 leading-relaxed font-light">
+              Transform your evaluation process with AI-powered OMR sheet processing that delivers 
+              <span className="text-primary font-semibold"> professional results</span> in seconds, not hours.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button asChild size="lg" className="text-lg px-8 py-6">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <Button asChild size="lg" className="text-lg px-12 py-7 btn-hero shadow-2xl hover:shadow-primary/25 transition-all duration-500">
                 <Link to="/upload">
-                  <Upload className="mr-2 h-5 w-5" />
+                  <Upload className="mr-3 h-6 w-6" />
                   Start Evaluating
                 </Link>
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 py-6">
-                <Link to="/dashboard">
+              <Button variant="outline" size="lg" className="text-lg px-12 py-7 border-2 hover:bg-accent/50 transition-all duration-300 hover:scale-105">
+                <Link to="/dashboard" className="flex items-center">
+                  <BarChart3 className="mr-3 h-6 w-6" />
                   View Dashboard
                 </Link>
               </Button>
@@ -98,15 +100,23 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-muted/30">
+      <section className="py-20 bg-gradient-to-r from-primary/10 via-primary-glow/5 to-primary/10 rounded-3xl border border-primary/10 mx-6">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              Trusted by Educators Worldwide
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Join thousands of institutions already revolutionizing their evaluation process
+            </p>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl lg:text-4xl font-bold text-primary mb-2">
+              <div key={index} className="text-center group">
+                <div className="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
                   {stat.number}
                 </div>
-                <div className="text-muted-foreground font-medium">
+                <div className="text-muted-foreground text-lg font-medium">
                   {stat.label}
                 </div>
               </div>
@@ -116,14 +126,14 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20">
+      <section className="py-24">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
               Why Choose Our OMR System?
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Built for educators, by educators. Experience the future of automated evaluation.
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Built for educators, by educators. Experience the future of automated evaluation with cutting-edge technology.
             </p>
           </div>
           
@@ -131,16 +141,16 @@ export default function Home() {
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <Card key={index} className="p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border/50 bg-card/50 backdrop-blur-sm">
-                  <div className="flex items-center space-x-4 mb-4">
-                    <div className="p-3 bg-primary/10 rounded-xl">
-                      <Icon className="h-6 w-6 text-primary" />
+                <Card key={index} className="group p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-0 bg-gradient-to-br from-card to-muted/30 hover-glow">
+                  <div className="mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary-glow rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                      <Icon className="h-8 w-8 text-primary-foreground" />
                     </div>
-                    <h3 className="text-xl font-semibold text-foreground">
-                      {feature.title}
-                    </h3>
                   </div>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <h3 className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors">
+                    {feature.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed text-lg">
                     {feature.description}
                   </p>
                 </Card>
@@ -151,18 +161,18 @@ export default function Home() {
       </section>
 
       {/* Process Section */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-24 bg-muted/20">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
               Simple 3-Step Process
             </h2>
-            <p className="text-xl text-muted-foreground">
-              From upload to insights in minutes
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Get started in minutes, not hours. Our streamlined workflow gets you professional results fast.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-12">
             {[
               {
                 step: "01",
@@ -185,19 +195,22 @@ export default function Home() {
             ].map((item, index) => {
               const Icon = item.icon;
               return (
-                <div key={index} className="text-center">
+                <div key={index} className="text-center group">
                   <div className="relative mb-8">
-                    <div className="w-20 h-20 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                      <Icon className="h-8 w-8 text-primary-foreground" />
+                    <div className="w-24 h-24 bg-gradient-to-br from-primary to-primary-glow rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-2xl group-hover:scale-110 transition-all duration-300">
+                      <Icon className="h-10 w-10 text-primary-foreground" />
                     </div>
-                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-primary-glow rounded-full flex items-center justify-center text-primary-foreground text-sm font-bold">
+                    <div className="absolute -top-3 -right-3 w-10 h-10 bg-primary-glow rounded-full flex items-center justify-center text-primary-foreground text-lg font-bold shadow-lg">
                       {item.step}
                     </div>
+                    {index < 2 && (
+                      <div className="hidden md:block absolute top-12 left-full w-full h-0.5 bg-gradient-to-r from-primary/50 to-transparent" />
+                    )}
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-4">
+                  <h3 className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed text-lg">
                     {item.description}
                   </p>
                 </div>
@@ -208,21 +221,33 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <Card className="p-12 bg-gradient-to-br from-primary/5 to-primary-glow/5 border-primary/20">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-              Ready to Transform Your Evaluation Process?
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8">
-              Join thousands of educators who have already made the switch to intelligent OMR evaluation.
-            </p>
-            <Button asChild size="lg" className="text-lg px-8 py-6">
-              <Link to="/upload">
-                <Upload className="mr-2 h-5 w-5" />
-                Start Your First Evaluation
-              </Link>
-            </Button>
+      <section className="py-24">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <Card className="p-16 bg-gradient-to-br from-primary/10 via-primary-glow/5 to-primary/10 border-primary/20 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary-glow/5" />
+            <div className="relative">
+              <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+                Ready to Transform Your Evaluation Process?
+              </h2>
+              <p className="text-xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed">
+                Join thousands of educators who have already made the switch to intelligent OMR evaluation. 
+                Experience the future today.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <Button asChild size="lg" className="text-lg px-12 py-7 btn-hero shadow-2xl hover:shadow-primary/25 transition-all duration-500">
+                  <Link to="/upload">
+                    <Upload className="mr-3 h-6 w-6" />
+                    Start Your First Evaluation
+                  </Link>
+                </Button>
+                <Button variant="outline" size="lg" className="text-lg px-12 py-7 border-2 hover:bg-accent/50 transition-all duration-300">
+                  <Link to="/analytics" className="flex items-center">
+                    <PieChart className="mr-3 h-6 w-6" />
+                    See Analytics Demo
+                  </Link>
+                </Button>
+              </div>
+            </div>
           </Card>
         </div>
       </section>

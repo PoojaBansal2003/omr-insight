@@ -5,9 +5,14 @@ import {
   BarChart3, 
   AlertTriangle, 
   FileDown,
-  Brain
+  Brain,
+  Menu
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useState } from "react";
 
 const navItems = [
   { path: "/upload", label: "Upload", icon: Upload },
@@ -18,23 +23,27 @@ const navItems = [
 ];
 
 export function Navigation() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <nav className="bg-card/50 backdrop-blur-lg border-b border-border/50 sticky top-0 z-50">
+    <nav className="bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60 border-b border-border shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <NavLink to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-            <div className="p-2 bg-gradient-to-br from-primary to-primary-glow rounded-xl text-primary-foreground">
+          <NavLink to="/" className="flex items-center space-x-3 hover:opacity-80 transition-all duration-300 hover:scale-105">
+            <div className="p-2 bg-gradient-to-br from-primary to-primary-glow rounded-xl text-primary-foreground shadow-lg">
               <Brain className="h-6 w-6" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-foreground">OMR Evaluator</h1>
+              <h1 className="text-xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+                OMR Evaluator
+              </h1>
               <p className="text-xs text-muted-foreground">Empowering Evaluators with Instant Insights</p>
             </div>
           </NavLink>
 
-          {/* Navigation Links */}
-          <div className="flex space-x-1">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-1">
             {navItems.map(({ path, label, icon: Icon }) => (
               <NavLink
                 key={path}
@@ -42,10 +51,10 @@ export function Navigation() {
                 end={path === "/"}
                 className={({ isActive }) =>
                   cn(
-                    "flex items-center space-x-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200",
+                    "flex items-center space-x-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300",
                     isActive
-                      ? "bg-primary text-primary-foreground shadow-lg"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                      ? "bg-primary text-primary-foreground shadow-lg scale-105"
+                      : "text-muted-foreground hover:text-foreground hover:bg-accent hover:scale-105"
                   )
                 }
               >
@@ -53,6 +62,42 @@ export function Navigation() {
                 <span>{label}</span>
               </NavLink>
             ))}
+            <ThemeToggle />
+          </div>
+
+          {/* Mobile Navigation */}
+          <div className="md:hidden flex items-center space-x-2">
+            <ThemeToggle />
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="sm" className="hover:bg-accent">
+                  <Menu className="w-5 h-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-64 bg-card">
+                <div className="flex flex-col space-y-2 mt-6">
+                  {navItems.map(({ path, label, icon: Icon }) => (
+                    <NavLink
+                      key={path}
+                      to={path}
+                      end={path === "/"}
+                      onClick={() => setIsOpen(false)}
+                      className={({ isActive }) =>
+                        cn(
+                          "flex items-center space-x-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300",
+                          isActive
+                            ? "bg-primary text-primary-foreground shadow-lg"
+                            : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                        )
+                      }
+                    >
+                      <Icon className="h-4 w-4" />
+                      <span>{label}</span>
+                    </NavLink>
+                  ))}
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>
